@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chart.js Redraw Example</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="chart.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      window.chartOptions = {
+        segmentShowStroke: false,
+        percentageInnerCutout: 75,
+        animation: false
+      };
+      <script>
+      var chartUpdate = function(value) {
+        console.log("Updating Chart: ", value);
+        
+        // Replace the chart canvas element
+        $('#chart').replaceWith('<canvas id="chart" width="300" height="300"></canvas>');
+        
+        // Draw the chart
+        var ctx = $('#chart').get(0).getContext("2d");
+        new Chart(ctx).Doughnut([
+          { value: value,
+            color: '#4FD134' },
+          { value: 100-value,
+            color: '#DDDDDD' }],
+          window.chartOptions);
+        
+        // Schedule next chart update tick
+        setTimeout (function() { chartUpdate(value - 1); }, 1000);
+      }
+      $(document).ready(function() {
+        setTimeout (function() { chartUpdate(99); }, 1000);
+      })
+      
+    </script>
+  </head>
+  <body>
+    <canvas id="chart" width="300" height="300"></canvas>
+  </body>
+</html>
+
+
+
+
+ <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">Home</a></li>
+
+
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="button"><a href="index.html">OTC</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="button"><a href="OTM.html">OTM</a></li>
+  
+                </ul>
+              
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Automatic<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="chart.js">ACTIVE #1</a></li>
+                            <li><a href="#">ACTIVE #2</a></li>
+                            <li><a href="#">ROLLER #1</a></li>
+                            <li><a href="#">ROLLER #2</a></li>
+                            <li><a href="#">ROLLER #3</a></li>
+                            <li><a href="#">XS63</a></li>
+                            <li><a href="#">XS42</a></li>
+                            <li><a href="#">THS 100X</a></li>
+                            <li><a href="#">DIAMOND #1</a></li>
+                            <li><a href="#">DIAMOND #2</a></li>
+                            <li><a href="#">DIAMOND #3</a></li>
+                        </ul>
+                    </li>
+                
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Semi-Automatic<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">EDM Takumi</a></li>
+                            <li><a href="#">EDM 156W</a></li>
+                            <li><a href="#">HAAS #1</a></li>
+                            <li><a href="#">HAAS #2</a></li>
+                            <li><a href="#">AWEA PLATE</a></li>
+                            <li><a href="#">AWEA</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gundrill<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">TARUS</a></li>
+                            <li><a href="#">UNISIG</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horizontal<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">ML100</a></li>
+                            <li><a href="#">TOSHIBA #1</a></li>
+                            <li><a href="#">TOSHIBA #2</a></li>
+                            <li><a href="#">TOSHIBA #3</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vertical<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">BF160 #1</a></li>
+                            <li><a href="#">BF160#2</a></li>
+                            <li><a href="#">BF160 #3</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                </ul>
+            </div>
+        </nav>
+    </div>

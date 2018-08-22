@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>OTC Dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<link href="nav.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+</head>
+
+<body>
+	<meta http-equiv="refresh" content="45">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#">
+				<img alt="Brand" src="/img/color.png" id="logo">
+				</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Home</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Automatic<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="act1.html">ACTIVE #1</a></li>
+							<li><a href="act2.html">ACTIVE #2</a></li>
+							<li><a href="rol1.html">ROLLER #1</a></li>
+							<li><a href="rol2.html">ROLLER #2</a></li>
+							<li><a href="rol3.html">ROLLER #3</a></li>
+							<li><a href="xs63.html">XS63</a></li>
+							<li><a href="xs42.html">XS42</a></li>
+							<li><a href="ths100x.html">THS 100X</a></li>
+							<li><a href="dia1.html">DIAMOND #1</a></li>
+							<li><a href="dia2.html">DIAMOND #2</a></li>
+							<li><a href="dia3.html">DIAMOND #3</a></li>
+						</ul>
+					</li>
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Semi-Automatic<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="edtak.html">EDM Takumi</a></li>
+								<li><a href="ed156.html">EDM 156W</a></li>
+								<li><a href="has1.html">HAAS #1</a></li>
+								<li><a href="has2.html">HAAS #2</a></li>
+								<li><a href="awep.html">AWEA PLATE</a></li>
+								<li><a href="awe.html">AWEA</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gundrill<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="tar.html">TARUS</a></li>
+								<li><a href="uni.html">UNISIG</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horizontal<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="ml.html">ML100</a></li>
+								<li><a href="tosh1.html">TOSHIBA #1</a></li>
+								<li><a href="tosh2.html">TOSHIBA #2</a></li>
+								<li><a href="tosh3.html">TOSHIBA #3</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vertical<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="bf1.html">BF160 #1</a></li>
+								<li><a href="bf2.html">BF160 #2</a></li>
+								<li><a href="bf3.html">BF160 #3</a></li>
+							</ul>
+						</li>
+					</ul>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+
+
+
+	<div class="container">
+		<canvas id="chart"></canvas>
+	</div>
+
+</body>
+
+</html>
+<script>
+	
+	window.onresize = function(event){
+		location.reload();
+	};
+	
+	var udata = [];
+
+	$.getJSON("/data/liveData/master.json", function(result) {
+		let m = (result['DIAMOND #2']);
+		for (i = 0; i < 7; i++) {
+			udata.push(parseInt(m[i]['y']));
+		}
+
+
+		let dates = [];
+		let now = moment();
+		let now2 = moment();
+			let maxs = [];
+			let mins = [];
+			let avgs = [];
+
+		dates[6] = now;
+
+		var max = Math.max.apply(null, udata);
+
+		var min = Math.min.apply(null, udata);
+
+		let avg = 0;
+		let sum = 0;
+		for (i = 0; i < udata.length; i++) {
+			sum += udata[i];
+		}
+
+				avg = sum / udata.length
+
+				let mx = (udata[6] - udata[0]) / 6;
+
+				let b = udata[0];
+				var line = [];
+				for (i = 0; i < 7; i++) {
+					let t = (mx * i) + b
+					line[i] = t
+				}
+		
+		
+
+				for (i = 0; i < 6; i++) {
+
+					let x = now.add(-1, 'days').format('ll');
+					let c = x.indexOf(",");
+					dates[5 - i] = x.substring(0, c);
+				}
+				let c = now2.format('ll').indexOf(",");
+				dates[6] = now2.format('ll').substring(0, c);
+
+
+					for(i=0; i<7; i++){
+
+							maxs[i] = max;
+							mins[i] = min;
+							avgs[i] = avg;
+		}
+					
+
+				var ctx = document.getElementById("chart");
+				var myChart = new Chart(ctx, {
+						type: 'line',
+						data : {
+
+								labels: dates,
+								datasets:[{
+										label: 'Utilization %',
+										data: udata,
+										borderWidth: 1,
+										backgroundColor: "rgba(128,182,244, 0.2)",
+										borderColor: "rgb(128,182,244)",
+										pointBorderColor: "#000000",
+										pointBackgroundColor: "#80b6f4",
+										borderWidth: 3,
+										pointHoverBorderColor: "#80b6f4",
+										pointBorderWidth: 1,
+										pointHoverRadius: 8,
+										pointHoverBorderWidth: 1,
+										pointRadius: 6,
+										lineTension: 0.2
+									},{
+								
+											label: 'Running Average',
+									data: line,				
+								  fill: false,
+									borderColor: "red",
+									borderDash: [8,15],
+									borderWidth: 1,
+										pointRadius: 0
+							},
+												{ data: maxs,
+												label: 'Max',
+												 fill: false,
+												 borderColor: "grey",
+												 borderDash: [8,15],
+												 borderWidth: 1,
+														 pointRadius: 0
+												},
+												{
+												 data: mins,
+												 label: 'Min',
+												 fill: false,
+												 borderColor: "grey",
+												 borderDash: [8,15],
+												 borderWidth: 1,
+													pointRadius: 0	
+												},
+											 {
+													 data: avgs,
+													 label: 'Average',
+												 fill: false,
+												 borderColor: "blue",
+												 borderDash: [8,15],
+												 borderWidth: 1,
+														 pointRadius: 0
+											 }
+												 
+												 
+												 
+												 ]
+						},
+						options:{
+								title: {
+								display: true,
+								text: 'Diamond #2 Utilization',
+								fontSize: 30,
+								fontfamily: "'Roboto'"
+								},
+								scales: {
+										yAxes:[{
+											ticks: {
+												min: 0,
+													max: 100,
+														callback: function(value) {return value + "%"}
+										}
+										}]
+										},
+												legend: {
+								position: "bottom"
+							}		 
+						}		
+				})		
+			});							
+		</script>
