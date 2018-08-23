@@ -183,6 +183,16 @@ $(document).ready(function () {
 		for (var i = 0; i < result.length; i++) {
 			data.push(result[i]);
 			var percentage = ((data[i].ptop / data[i].pbot) * 100).toFixed(0);
+			if (data[i].ipm.substring(0, 1) == '-') {
+				data[i].ipm = "N/A"
+			}
+			if (data[i].rpm.substring(0, 1) == '-') {
+				data[i].rpm = "N/A"
+			}
+			if (data[i].file.substring(0, 1) == '-') {
+				data[i].file = "N/A"
+			}
+
 			idList[i * 3].innerText = data[i].machine;
 			idList[i * 3 + 1].innerText =
 				data[i].job +
@@ -215,6 +225,7 @@ $(document).ready(function () {
 			if (data[i].status == 0) {
 				idList[i * 3].parentNode.className = "off";
 			}
+
 		}
 		console.log(data);
 	});
