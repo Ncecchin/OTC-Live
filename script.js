@@ -188,10 +188,18 @@ $(document).ready(function () {
 			}
 			if (data[i].rpm.substring(0, 1) == '-') {
 				data[i].rpm = "N/A"
+			} else if (data[i].rpm.charAt(data[i].rpm.length - 1) == '%') {
+				data[i].rpm = "Feedrate: " + data[i].rpm;
+
+			} else {
+				let r = data[i].rpm.indexOf("r");
+				data[i].rpm = data[i].rpm.substring(0, r) + " RPM";
 			}
 			if (data[i].file.substring(0, 1) == '-') {
-				data[i].file = "N/A"
+				data[i].file = " "
 			}
+
+
 
 			idList[i * 3].innerText = data[i].machine;
 			idList[i * 3 + 1].innerText =
