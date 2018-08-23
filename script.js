@@ -225,8 +225,6 @@ $(document).ready(function () {
 			if (data[i].status == 0) {
 				idList[i * 3].parentNode.className = "off";
 			}
-
 		}
-		console.log(data);
 	});
 });
