@@ -62,7 +62,7 @@ let act1_title = document.getElementById("act1_title"),
 	dia1_pg = document.getElementById("dia1_pg"),
 	dia2_pg = document.getElementById("dia2_pg"),
 	dia3_pg = document.getElementById("dia3_pg"),
-	ths100x_pg = document.getElementById("ths100x"),
+	ths100x_pg = document.getElementById("ths100x_pg"),
 	has1_pg = document.getElementById("has1_pg"),
 	has2_pg = document.getElementById("has2_pg"),
 	awep_pg = document.getElementById("awep_pg"),
@@ -86,7 +86,7 @@ var idList = [
   act1_pg,
   act2_title,
   act2_info,
-  act1_pg,
+  act2_pg,
   rol1_title,
   rol1_info,
   rol1_pg,
@@ -200,6 +200,9 @@ $(document).ready(function () {
 			}
 
 
+			if (String(percentage).charAt(0) == '-' || String(percentage).charAt(0) == 'I') {
+				percentage = "N/A"
+			}
 
 			idList[i * 3].innerText = data[i].machine;
 			idList[i * 3 + 1].innerText =
@@ -214,9 +217,8 @@ $(document).ready(function () {
 				data[i].file +
 				"\n" +
 				data[i].procedure +
-				"\n" +
-				valid(percentage) +
-				"%";
+				"\n";
+
 
 			if (data[i].status == 1) {
 				idList[i * 3].parentNode.className = "on";
@@ -233,6 +235,11 @@ $(document).ready(function () {
 			if (data[i].status == 0) {
 				idList[i * 3].parentNode.className = "off";
 			}
+
+			idList[i * 3 + 2].style.width = String(percentage) + "%";
+			idList[i * 3 + 2].innerText = String(percentage) + "%";
+
+			idList[i * 3 + 2].firstChild.innerText = String(percentage) + "%";
 		}
 	});
 });
