@@ -89,3 +89,85 @@ h3 {
 	font-size: 45px;
 	text-decoration: underline;
 }
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown {
+	position: relative;
+
+	/** Make it fit tightly around it's children */
+	display: inline-block;
+}
+
+.dropdown .dropdown-menu {
+	position: absolute;
+
+	/**
+     * Set the top of the dropdown menu to be positioned 100%
+     * from the top of the container, and aligned to the left.
+     */
+	top: 100%;
+	left: 0;
+
+	/** Allow no empty space between this and .dropdown */
+	margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+	/** Show dropdown menu */
+	display: block;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+
+dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown .dropdown-menu {
+	position: absolute;
+	top: 100%;
+	display: none;
+	margin: 0;
+
+	/****************
+     ** NEW STYLES **
+     ****************/
