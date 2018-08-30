@@ -58,6 +58,13 @@ p {
   font-family: "Roboto-medium";
 }
 
+h1 {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: -55px;
+  text-decoration: underline;
+}
+
 h3 {
   text-align: center;
   padding-top: 10px;
